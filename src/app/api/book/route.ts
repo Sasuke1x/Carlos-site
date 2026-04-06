@@ -45,6 +45,7 @@ export const POST = async (request: NextRequest) => {
       );
     }
 
+    // Fetch calendar data to check availability AND get real pricing
     const calendarRes = await fetch(
       `${BASE_URL}/properties/${propertyId}/calendar?start_date=${checkIn}&end_date=${checkOut}`,
       {
@@ -55,23 +56,47 @@ export const POST = async (request: NextRequest) => {
       }
     );
 
-    if (calendarRes.ok) {
-      const calendarData = await calendarRes.json();
-      const days = calendarData.data?.days ?? [];
-      const unavailable = days.filter(
-        (d: { status: { available: boolean } }) => !d.status.available
+    if (!calendarRes.ok) {
+      console.error("Failed to fetch calendar for pricing:", calendarRes.status);
+      return NextResponse.json(
+        { error: "Unable to verify availability. Please try again." },
+        { status: 502 }
       );
-      if (unavailable.length > 0) {
-        return NextResponse.json(
-          { error: "Some selected dates are unavailable. Please choose different dates." },
-          { status: 409 }
-        );
-      }
     }
 
+    const calendarData = await calendarRes.json();
+    const days = calendarData.data?.days ?? [];
+
+    // Check availability
+    const unavailable = days.filter(
+      (d: { status: { available: boolean } }) => !d.status.available
+    );
+    if (unavailable.length > 0) {
+      return NextResponse.json(
+        { error: "Some selected dates are unavailable. Please choose different dates." },
+        { status: 409 }
+      );
+    }
+
+    // Calculate real total from Hospitable's per-night pricing
     const nights = Math.ceil(
       (checkOutDate.getTime() - checkInDate.getTime()) / (1000 * 60 * 60 * 24)
     );
+
+    let totalAccommodation = 0;
+    for (const day of days) {
+      if (day.price?.amount) {
+        totalAccommodation += day.price.amount;
+      }
+    }
+
+    if (totalAccommodation === 0) {
+      console.error("No pricing data available for selected dates");
+      return NextResponse.json(
+        { error: "Pricing unavailable for these dates. Please try again or contact us." },
+        { status: 400 }
+      );
+    }
 
     const hospitable_body = {
       property_id: propertyId,
@@ -87,7 +112,7 @@ export const POST = async (request: NextRequest) => {
       language: "en",
       financials: {
         currency: "USD",
-        accommodation: nights * 10000,
+        accommodation: totalAccommodation,
       },
     };
 
