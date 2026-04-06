@@ -8,7 +8,6 @@ import {
   TrendingUp,
   HardHat,
   ArrowRight,
-  ImageIcon,
 } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -113,39 +112,48 @@ const RenovationPage = () => {
         </div>
       </section>
 
-      {/* Before/After Gallery Placeholder */}
-      <section className="bg-green-50/50 px-6 py-20 md:py-28">
-        <div className="mx-auto max-w-6xl">
-          <div className="mb-12 text-center">
-            <h2 className="mb-4 text-3xl font-bold text-green-950 md:text-4xl">
-              Before &amp; After
-            </h2>
-            <p className="mx-auto max-w-2xl text-lg text-gray-600">
-              See the transformations we&apos;ve completed for property owners
-              across the Triad.
-            </p>
-          </div>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {[1, 2, 3].map((item) => (
+      {/* Project Gallery / CTA */}
+        <div className="mx-auto max-w-7xl px-6 py-16">
+          <h2 className="text-center text-3xl font-bold text-gray-900">
+            Our Work
+          </h2>
+          <p className="mx-auto mt-3 max-w-2xl text-center text-gray-600">
+            We partner with property owners across the Triad to deliver
+            renovation projects that increase value and rental performance.
+          </p>
+          <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-3">
+            {[
+              {
+                title: "Kitchen & Bath Remodels",
+                desc: "Modern upgrades that increase property value and guest satisfaction.",
+              },
+              {
+                title: "Full Property Renovations",
+                desc: "End-to-end project management for fix & flip or rental conversion.",
+              },
+              {
+                title: "Value-Add Improvements",
+                desc: "Strategic upgrades designed to maximize return on investment.",
+              },
+            ].map((item) => (
               <div
-                key={item}
-                className="flex aspect-[4/3] flex-col items-center justify-center rounded-2xl border-2 border-dashed border-green-200 bg-green-100/50"
-                role="img"
-                aria-label={`Project ${item} before and after photos coming soon`}
+                key={item.title}
+                className="rounded-xl border border-gray-100 bg-white p-8 shadow-sm"
               >
-                <ImageIcon
-                  className="mb-3 h-10 w-10 text-green-400"
-                  aria-hidden="true"
-                />
-                <p className="text-sm font-medium text-green-700">
-                  Project {item}
-                </p>
-                <p className="text-xs text-green-500">Photos Coming Soon</p>
+                <h3 className="text-lg font-semibold text-gray-900">{item.title}</h3>
+                <p className="mt-2 text-sm text-gray-500 leading-relaxed">{item.desc}</p>
               </div>
             ))}
           </div>
+          <div className="mt-10 text-center">
+            <Link
+              href="/contact"
+              className="inline-flex items-center rounded-lg bg-[#065f46] px-6 py-3 text-sm font-semibold text-white shadow-md transition-all hover:bg-[#065f46]/90"
+            >
+              Discuss Your Project
+            </Link>
+          </div>
         </div>
-      </section>
 
       {/* CTA */}
       <section className="bg-green-900 px-6 py-20 text-white md:py-28">
