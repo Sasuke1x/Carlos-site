@@ -15,6 +15,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL ?? "https://ceohostingu.com"
+  ),
   title: {
     default: "CEO Hosting U | Furnished Housing & Property Management in the Triad",
     template: "%s | CEO Hosting U",
