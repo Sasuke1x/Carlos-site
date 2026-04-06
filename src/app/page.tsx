@@ -1,19 +1,19 @@
-import Hero from "@/components/home/Hero";
-import WhoWeServe from "@/components/home/WhoWeServe";
-import FeaturedProperties from "@/components/home/FeaturedProperties";
-import WhyBookDirect from "@/components/home/WhyBookDirect";
-import AboutPreview from "@/components/home/AboutPreview";
-import OwnerCTA from "@/components/home/OwnerCTA";
+import HeroSection from "@/components/home/HeroSection";
+import TriadAuthority from "@/components/home/TriadAuthority";
+import ServiceCards from "@/components/home/ServiceCards";
+import SmartSystems from "@/components/home/SmartSystems";
+import VipClub from "@/components/home/VipClub";
+import FinalCta from "@/components/home/FinalCta";
 
 const HomePage = () => {
   return (
     <>
-      <Hero />
-      <WhoWeServe />
-      <FeaturedProperties />
-      <WhyBookDirect />
-      <AboutPreview />
-      <OwnerCTA />
+      <HeroSection />
+      <TriadAuthority />
+      <ServiceCards />
+      <SmartSystems />
+      <VipClub />
+      <FinalCta />
     </>
   );
 };
