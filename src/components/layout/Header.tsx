@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { Menu, X } from "lucide-react";
 
 type NavItem = {
@@ -11,12 +12,10 @@ type NavItem = {
 };
 
 const NAV_ITEMS: NavItem[] = [
+  { label: "Home", href: "/" },
   { label: "Properties", href: "/properties" },
   { label: "Management", href: "/property-management" },
   { label: "Renovation", href: "/renovation" },
-  { label: "AI & Automation", href: "/ai-automation" },
-  { label: "About", href: "/about" },
-  { label: "Contact", href: "/contact" },
 ];
 
 const Header = () => {
@@ -58,18 +57,15 @@ const Header = () => {
       }`}
     >
       <div className="mx-auto flex max-w-[1440px] items-center justify-between px-6 py-4 lg:px-10">
-        <Link
-          href="/"
-          className="flex items-baseline gap-0.5 text-xl font-bold tracking-tight"
-          aria-label="CEO Hosting U — Go to homepage"
-        >
-          <span className="text-[13px] font-semibold uppercase tracking-widest text-[#d4a847]">
-            CEO
-          </span>
-          <span className={`ml-1 transition-colors duration-300 ${useTransparent ? "text-white" : "text-[#065f46]"}`}>
-            Hosting
-          </span>
-          <span className="text-[#d4a847]"> U</span>
+        <Link href="/" className="flex items-center gap-2">
+          <Image
+            src="/images/branding/ceo-hosting-u-logo.png"
+            alt="CEO Hosting U"
+            width={160}
+            height={48}
+            className="h-10 w-auto"
+            priority
+          />
         </Link>
 
         <nav className="hidden items-center gap-1 lg:flex" aria-label="Main navigation">
@@ -97,7 +93,7 @@ const Header = () => {
                 : "bg-[#065f46] text-white hover:bg-[#053e2e]"
             }`}
           >
-            Book a stay
+            Book Now
           </Link>
 
           <button
@@ -139,12 +135,15 @@ const Header = () => {
           <Link
             href="/"
             onClick={handleCloseMobileMenu}
-            className="text-lg font-bold tracking-tight"
-            aria-label="CEO Hosting U — Go to homepage"
+            className="flex items-center gap-2"
           >
-            <span className="text-[13px] font-semibold uppercase tracking-widest text-[#d4a847]">CEO</span>
-            <span className="ml-1 text-[#065f46]">Hosting</span>
-            <span className="text-[#d4a847]"> U</span>
+            <Image
+              src="/images/branding/ceo-hosting-u-logo.png"
+              alt="CEO Hosting U"
+              width={140}
+              height={42}
+              className="h-9 w-auto"
+            />
           </Link>
           <button
             type="button"
@@ -158,15 +157,6 @@ const Header = () => {
 
         <nav className="flex-1 overflow-y-auto px-3 py-2" aria-label="Mobile navigation">
           <ul className="flex flex-col">
-            <li>
-              <Link
-                href="/"
-                onClick={handleCloseMobileMenu}
-                className="block rounded-xl px-4 py-3.5 text-[15px] font-medium text-gray-800 transition-colors hover:bg-gray-50"
-              >
-                Home
-              </Link>
-            </li>
             {NAV_ITEMS.map((item) => (
               <li key={item.href}>
                 <Link
@@ -187,7 +177,7 @@ const Header = () => {
             onClick={handleCloseMobileMenu}
             className="flex w-full items-center justify-center rounded-xl bg-[#065f46] px-5 py-3.5 text-[15px] font-semibold text-white transition-colors hover:bg-[#053e2e]"
           >
-            Book a stay
+            Book Now
           </Link>
         </div>
       </div>
