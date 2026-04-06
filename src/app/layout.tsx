@@ -60,7 +60,7 @@ const RootLayout = ({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Header />
-        <main className="min-h-screen">{children}</main>
+        <main className="min-h-screen pt-32">{children}</main>
         <Footer />
       </body>
     </html>

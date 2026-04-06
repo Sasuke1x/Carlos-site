@@ -22,7 +22,7 @@ const Footer = () => {
                 alt="CEO Hosting U"
                 width={160}
                 height={48}
-                className="h-10 w-auto brightness-0 invert"
+                className="h-16 w-auto"
               />
             </Link>
             <p className="text-sm text-gray-300 leading-relaxed">

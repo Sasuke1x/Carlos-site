@@ -136,6 +136,12 @@ export const POST = async (request: NextRequest) => {
       );
     }
 
+    // Log full response to understand payment flow
+    console.log("Hospitable reservation response:", JSON.stringify(json.data, null, 2));
+
+    const status = json.data.status;
+    const guestPortalUrl = json.data.guest_portal_url ?? null;
+
     return NextResponse.json({
       success: true,
       reservation: {
@@ -144,7 +150,9 @@ export const POST = async (request: NextRequest) => {
         checkIn: json.data.check_in,
         checkOut: json.data.check_out,
         nights: json.data.nights,
-        status: json.data.status,
+        status,
+        guestPortalUrl,
+        pendingPayment: status === "pending" || status === "awaiting_payment",
       },
     });
   } catch (error) {

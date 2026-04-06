@@ -79,6 +79,8 @@ const BookingCalendar = ({
   const [bookingStatus, setBookingStatus] = useState<BookingStatus>("idle");
   const [bookingError, setBookingError] = useState("");
   const [reservationCode, setReservationCode] = useState("");
+  const [pendingPayment, setPendingPayment] = useState(false);
+  const [guestPortalUrl, setGuestPortalUrl] = useState<string | null>(null);
 
   const fetchCalendar = useCallback(
     async (month: Date) => {
@@ -195,6 +197,8 @@ const BookingCalendar = ({
       }
 
       setReservationCode(json.reservation.code);
+      setPendingPayment(json.reservation.pendingPayment ?? false);
+      setGuestPortalUrl(json.reservation.guestPortalUrl ?? null);
       setBookingStatus("success");
       setStep("confirm");
     } catch {
@@ -278,16 +282,39 @@ const BookingCalendar = ({
         <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-[#065f46]/10">
           <CheckCircle className="h-6 w-6 text-[#065f46]" />
         </div>
-        <h3 className="text-lg font-semibold text-gray-900">Booking Confirmed!</h3>
+        <h3 className="text-lg font-semibold text-gray-900">
+          {pendingPayment ? "Almost There!" : "Booking Confirmed!"}
+        </h3>
         <p className="mt-1 text-sm text-gray-500">
-          Confirmation code: <span className="font-semibold text-[#065f46]">{reservationCode}</span>
+          Reference code: <span className="font-semibold text-[#065f46]">{reservationCode}</span>
         </p>
         <p className="mt-1 text-sm text-gray-500">
           {formatDate(checkIn!)} &rarr; {formatDate(checkOut!)} &middot; {nightCount} {nightCount === 1 ? "night" : "nights"}
         </p>
-        <p className="mt-3 text-xs text-gray-400">
-          A confirmation will be sent to {email}
-        </p>
+        {pendingPayment ? (
+          <div className="mt-4 rounded-lg bg-amber-50 border border-amber-100 p-4">
+            <p className="text-sm font-medium text-amber-800">
+              Complete your payment to confirm
+            </p>
+            <p className="mt-1 text-xs text-amber-700">
+              Check your email ({email}) for a secure payment link from CEO Hosting U. Your dates are held until payment is completed.
+            </p>
+            {guestPortalUrl && (
+              <a
+                href={guestPortalUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-3 inline-flex items-center rounded-lg bg-[#065f46] px-4 py-2 text-xs font-semibold text-white transition-all hover:bg-[#065f46]/90"
+              >
+                Complete Payment
+              </a>
+            )}
+          </div>
+        ) : (
+          <p className="mt-3 text-xs text-gray-400">
+            A confirmation will be sent to {email}
+          </p>
+        )}
         <div className="mt-4 rounded-lg bg-gray-50 p-3">
           <p className="text-xs text-gray-500">
             Need to cancel or reschedule? Check your confirmation email for a link to manage your reservation.

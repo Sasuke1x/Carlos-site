@@ -15,7 +15,7 @@ import {
 } from "lucide-react";
 import { getPropertyBySlug, getAllPropertySlugs } from "@/lib/properties";
 import PropertyGallery from "@/components/properties/PropertyGallery";
-import BookingCalendar from "@/components/properties/BookingCalendar";
+const HOSPITABLE_SITE_ID = "a179291f-6d0e-4af3-8d0b-f23a48da82ed";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -50,11 +50,11 @@ const PropertyDetailPage = async ({ params }: PageProps) => {
   }
 
   return (
-    <main className="min-h-screen bg-neutral-50">
+    <div className="-mt-32 min-h-screen bg-neutral-50">
       {/* Breadcrumb */}
       <nav
         aria-label="Breadcrumb"
-        className="bg-[#022c22] px-4 pt-6 pb-4"
+        className="bg-[#022c22] px-4 pt-40 pb-4"
       >
         <ol className="mx-auto flex max-w-5xl items-center gap-1.5 text-sm text-emerald-200/70">
           <li>
@@ -306,18 +306,29 @@ const PropertyDetailPage = async ({ params }: PageProps) => {
 
           {/* Right column - Booking CTA (sticky sidebar) */}
           <aside className="lg:col-span-1">
-            <div className="sticky top-24 rounded-2xl border border-neutral-200 bg-white p-5 shadow-lg">
+            <div className="sticky top-36 rounded-2xl border border-neutral-200 bg-white p-5 shadow-lg">
               <p className="text-xs font-medium uppercase tracking-wider text-gray-400">
-                Availability
+                Book This Property
               </p>
 
-              <div className="mt-3">
-                <BookingCalendar
-                  hospitable_id={property.hospitable_id}
-                  airbnbUrl={property.airbnbUrl}
-                  propertyName={property.name}
-                  maxGuests={property.capacity.guests}
+              <div className="mt-3 -mx-5">
+                <iframe
+                  id="booking-iframe"
+                  sandbox="allow-top-navigation allow-scripts allow-same-origin"
+                  style={{ width: "100%", height: "900px" }}
+                  frameBorder="0"
+                  src={`https://booking.hospitable.com/widget/${HOSPITABLE_SITE_ID}/${property.widget_id}`}
+                  title={`Book ${property.name}`}
                 />
+              </div>
+
+              {/* Cancellation Policy */}
+              <div className="mt-4 rounded-lg bg-amber-50 border border-amber-100 p-3">
+                <p className="text-xs font-semibold text-amber-800">Cancellation Policy</p>
+                <ul className="mt-1 space-y-0.5 text-xs text-amber-700">
+                  <li>7–30 days before check-in: 50% refund</li>
+                  <li>Less than 7 days before check-in: Non-refundable</li>
+                </ul>
               </div>
 
               <hr className="my-4 border-neutral-100" />
@@ -358,7 +369,7 @@ const PropertyDetailPage = async ({ params }: PageProps) => {
           </aside>
         </div>
       </div>
-    </main>
+    </div>
   );
 };
 

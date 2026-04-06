@@ -23,8 +23,7 @@ const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
 
-  const isHomepage = pathname === "/";
-  const useTransparent = isHomepage && !isScrolled;
+  const useTransparent = false;
 
   const handleScroll = useCallback(() => {
     setIsScrolled(window.scrollY > 20);
@@ -56,14 +55,14 @@ const Header = () => {
           : "bg-white/95 shadow-sm backdrop-blur-md"
       }`}
     >
-      <div className="mx-auto flex max-w-[1440px] items-center justify-between px-6 py-4 lg:px-10">
+      <div className="mx-auto flex max-w-[1440px] items-center justify-between px-6 py-3 lg:px-10">
         <Link href="/" className="flex items-center gap-2">
           <Image
             src="/images/branding/ceo-hosting-u-logo.png"
             alt="CEO Hosting U"
-            width={160}
-            height={48}
-            className="h-10 w-auto"
+            width={200}
+            height={60}
+            className="h-24 w-auto"
             priority
           />
         </Link>
@@ -140,8 +139,8 @@ const Header = () => {
             <Image
               src="/images/branding/ceo-hosting-u-logo.png"
               alt="CEO Hosting U"
-              width={140}
-              height={42}
+              width={180}
+              height={54}
               className="h-9 w-auto"
             />
           </Link>

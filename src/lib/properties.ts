@@ -1,6 +1,7 @@
 export type Property = {
   id: string;
   hospitable_id: string;
+  widget_id: string;
   slug: string;
   name: string;
   tagline: string;
@@ -40,6 +41,7 @@ export const properties: Property[] = [
   {
     id: "mize-road",
     hospitable_id: "9c4e86e1-bb46-4809-8aad-8d81169cfb39",
+    widget_id: "2177954",
     slug: "mize-road-retreat",
     name: "Modern 3BR Family Home Near Park",
     tagline: "Near Winston-Salem | Sleeps 6",
@@ -122,6 +124,7 @@ export const properties: Property[] = [
   {
     id: "salisbury-unit-a",
     hospitable_id: "b9e48a3b-17c5-44e3-be41-4e668ad3af14",
+    widget_id: "2177956",
     slug: "downtown-lexington-condo",
     name: "Cozy 2BR Condo in Downtown Lexington",
     tagline: "2 Min From Uptown | Sleeps 4",
@@ -206,6 +209,7 @@ export const properties: Property[] = [
   {
     id: "salisbury-apt-b",
     hospitable_id: "6bf14947-97a1-4664-971b-69fa73d71625",
+    widget_id: "2177958",
     slug: "modern-lexington-apartment",
     name: "Modern 3BR Apartment Near I-85",
     tagline: "20 Min to Polar Express | Sleeps 6",
@@ -284,6 +288,7 @@ export const properties: Property[] = [
   {
     id: "linwood-retreat",
     hospitable_id: "09428019-0a4d-49d3-bd07-e556a8aed29a",
+    widget_id: "2177970",
     slug: "family-retreat-hot-tub",
     name: "Family 3BR Retreat with Hot Tub",
     tagline: "Downtown Lexington | Sleeps 6",
