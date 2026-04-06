@@ -6,12 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Menu, X } from "lucide-react";
 
-type NavItem = {
-  label: string;
-  href: string;
-};
-
-const NAV_ITEMS: NavItem[] = [
+const NAV_ITEMS = [
   { label: "Home", href: "/" },
   { label: "Properties", href: "/properties" },
   { label: "Management", href: "/property-management" },
@@ -19,11 +14,9 @@ const NAV_ITEMS: NavItem[] = [
 ];
 
 const Header = () => {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
-
-  const useTransparent = false;
 
   const handleScroll = useCallback(() => {
     setIsScrolled(window.scrollY > 20);
@@ -35,47 +28,48 @@ const Header = () => {
   }, [handleScroll]);
 
   useEffect(() => {
-    document.body.style.overflow = isMobileMenuOpen ? "hidden" : "";
+    document.body.style.overflow = menuOpen ? "hidden" : "";
     return () => {
       document.body.style.overflow = "";
     };
-  }, [isMobileMenuOpen]);
+  }, [menuOpen]);
 
-  const handleCloseMobileMenu = () => setIsMobileMenuOpen(false);
+  const closeMenu = () => setMenuOpen(false);
 
-  const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === "Escape") handleCloseMobileMenu();
-  };
+  const isActive = (href: string) =>
+    href === "/" ? pathname === "/" : pathname.startsWith(href);
 
   return (
     <header
       className={`fixed top-0 z-50 w-full transition-all duration-300 ${
-        useTransparent
-          ? "bg-transparent"
-          : "bg-white/95 shadow-sm backdrop-blur-md"
+        isScrolled
+          ? "bg-white/95 shadow-md backdrop-blur-md"
+          : "bg-white shadow-sm"
       }`}
     >
-      <div className="mx-auto flex max-w-[1440px] items-center justify-between px-6 py-3 lg:px-10">
-        <Link href="/" className="flex items-center gap-2">
+      <div className="mx-auto flex max-w-[1440px] items-center justify-between px-4 py-2 sm:px-6 lg:px-10">
+        {/* Logo */}
+        <Link href="/" className="flex-shrink-0">
           <Image
             src="/images/branding/ceo-hosting-u-logo.png"
             alt="CEO Hosting U"
             width={200}
             height={60}
-            className="h-24 w-auto"
+            className="h-14 w-auto sm:h-20 lg:h-24"
             priority
           />
         </Link>
 
+        {/* Desktop Nav */}
         <nav className="hidden items-center gap-1 lg:flex" aria-label="Main navigation">
           {NAV_ITEMS.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className={`rounded-full px-4 py-2 text-[13px] font-medium transition-all duration-200 ${
-                useTransparent
-                  ? "text-white/90 hover:bg-white/10 hover:text-white"
-                  : "text-gray-700 hover:bg-black/5 hover:text-gray-900"
+              className={`rounded-full px-4 py-2 text-sm font-medium transition-all ${
+                isActive(item.href)
+                  ? "bg-[#065f46]/10 text-[#065f46]"
+                  : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
               }`}
             >
               {item.label}
@@ -83,85 +77,79 @@ const Header = () => {
           ))}
         </nav>
 
-        <div className="flex items-center gap-2">
+        {/* Desktop CTA + Mobile Hamburger */}
+        <div className="flex items-center gap-3">
           <Link
             href="/properties"
-            className={`hidden rounded-full px-5 py-2.5 text-[13px] font-semibold transition-all duration-200 sm:inline-flex ${
-              useTransparent
-                ? "bg-white text-[#065f46] hover:bg-white/90"
-                : "bg-[#065f46] text-white hover:bg-[#053e2e]"
-            }`}
+            className="hidden rounded-full bg-[#065f46] px-5 py-2.5 text-sm font-semibold text-white transition-all hover:bg-[#053e2e] lg:inline-flex"
           >
             Book Now
           </Link>
 
           <button
             type="button"
-            className={`inline-flex items-center justify-center rounded-full p-2.5 transition-colors lg:hidden ${
-              useTransparent
-                ? "text-white hover:bg-white/10"
-                : "text-gray-800 hover:bg-gray-100"
-            }`}
-            onClick={() => setIsMobileMenuOpen(true)}
-            aria-label="Open navigation menu"
-            aria-expanded={isMobileMenuOpen}
-            aria-controls="mobile-menu-panel"
+            className="inline-flex items-center justify-center rounded-lg p-2 text-gray-700 transition-colors hover:bg-gray-100 lg:hidden"
+            onClick={() => setMenuOpen(true)}
+            aria-label="Open menu"
           >
-            <Menu className="h-5 w-5" />
+            <Menu className="h-7 w-7" />
           </button>
         </div>
       </div>
 
-      {isMobileMenuOpen && (
+      {/* Mobile Menu Overlay */}
+      {menuOpen && (
         <div
-          className="fixed inset-0 z-40 bg-black/30 backdrop-blur-sm lg:hidden"
-          onClick={handleCloseMobileMenu}
+          className="fixed inset-0 z-40 bg-black/40 backdrop-blur-sm lg:hidden"
+          onClick={closeMenu}
           aria-hidden="true"
         />
       )}
 
+      {/* Mobile Menu Panel */}
       <div
-        id="mobile-menu-panel"
         role="dialog"
         aria-modal="true"
         aria-label="Navigation menu"
-        onKeyDown={handleKeyDown}
-        className={`fixed right-0 top-0 z-50 flex h-full w-80 flex-col bg-white transition-transform duration-300 ease-in-out lg:hidden ${
-          isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
+        onKeyDown={(e) => e.key === "Escape" && closeMenu()}
+        className={`fixed inset-y-0 right-0 z-50 flex w-full max-w-sm flex-col bg-white shadow-2xl transition-transform duration-300 ease-in-out lg:hidden ${
+          menuOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        <div className="flex items-center justify-between px-6 py-5">
-          <Link
-            href="/"
-            onClick={handleCloseMobileMenu}
-            className="flex items-center gap-2"
-          >
+        {/* Mobile Menu Header */}
+        <div className="flex items-center justify-between border-b border-gray-100 px-5 py-4">
+          <Link href="/" onClick={closeMenu}>
             <Image
               src="/images/branding/ceo-hosting-u-logo.png"
               alt="CEO Hosting U"
-              width={180}
-              height={54}
-              className="h-9 w-auto"
+              width={160}
+              height={48}
+              className="h-12 w-auto"
             />
           </Link>
           <button
             type="button"
-            className="rounded-full p-2 text-gray-500 transition-colors hover:bg-gray-100 hover:text-gray-800"
-            onClick={handleCloseMobileMenu}
-            aria-label="Close navigation menu"
+            className="rounded-lg p-2 text-gray-500 transition-colors hover:bg-gray-100 hover:text-gray-800"
+            onClick={closeMenu}
+            aria-label="Close menu"
           >
-            <X className="h-5 w-5" />
+            <X className="h-6 w-6" />
           </button>
         </div>
 
-        <nav className="flex-1 overflow-y-auto px-3 py-2" aria-label="Mobile navigation">
-          <ul className="flex flex-col">
+        {/* Mobile Nav Links */}
+        <nav className="flex-1 overflow-y-auto px-4 py-6" aria-label="Mobile navigation">
+          <ul className="space-y-1">
             {NAV_ITEMS.map((item) => (
               <li key={item.href}>
                 <Link
                   href={item.href}
-                  onClick={handleCloseMobileMenu}
-                  className="block rounded-xl px-4 py-3.5 text-[15px] font-medium text-gray-800 transition-colors hover:bg-gray-50"
+                  onClick={closeMenu}
+                  className={`flex items-center rounded-xl px-4 py-4 text-base font-medium transition-colors ${
+                    isActive(item.href)
+                      ? "bg-[#065f46]/10 text-[#065f46]"
+                      : "text-gray-700 hover:bg-gray-50"
+                  }`}
                 >
                   {item.label}
                 </Link>
@@ -170,14 +158,21 @@ const Header = () => {
           </ul>
         </nav>
 
-        <div className="border-t border-gray-100 px-4 py-5">
+        {/* Mobile CTA */}
+        <div className="border-t border-gray-100 p-5">
           <Link
             href="/properties"
-            onClick={handleCloseMobileMenu}
-            className="flex w-full items-center justify-center rounded-xl bg-[#065f46] px-5 py-3.5 text-[15px] font-semibold text-white transition-colors hover:bg-[#053e2e]"
+            onClick={closeMenu}
+            className="flex w-full items-center justify-center rounded-xl bg-[#065f46] px-5 py-4 text-base font-semibold text-white transition-colors hover:bg-[#053e2e]"
           >
             Book Now
           </Link>
+          <a
+            href="tel:+13368835635"
+            className="mt-3 flex w-full items-center justify-center rounded-xl border-2 border-[#d4a847] px-5 py-4 text-base font-semibold text-[#d4a847] transition-colors hover:bg-[#d4a847]/5"
+          >
+            Call (336) 883-5635
+          </a>
         </div>
       </div>
     </header>
