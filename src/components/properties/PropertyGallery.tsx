@@ -46,7 +46,7 @@ const PropertyGallery = ({ images }: PropertyGalleryProps) => {
       </div>
 
       <div
-        className="flex gap-2 overflow-x-auto pb-2"
+        className="flex gap-2 overflow-x-auto py-2 px-1"
         role="tablist"
         aria-label="Property image thumbnails"
       >
