@@ -288,6 +288,11 @@ const BookingCalendar = ({
         <p className="mt-3 text-xs text-gray-400">
           A confirmation will be sent to {email}
         </p>
+        <div className="mt-4 rounded-lg bg-gray-50 p-3">
+          <p className="text-xs text-gray-500">
+            Need to cancel or reschedule? Check your confirmation email for a link to manage your reservation.
+          </p>
+        </div>
         <button
           onClick={handleReset}
           className="mt-5 text-sm font-medium text-[#065f46] hover:underline"
@@ -407,6 +412,15 @@ const BookingCalendar = ({
             </div>
           </div>
         </div>
+
+        {/* Cancellation Policy */}
+          <div className="mt-4 rounded-lg bg-amber-50 border border-amber-100 p-3">
+            <p className="text-xs font-semibold text-amber-800">Cancellation Policy</p>
+            <ul className="mt-1 space-y-0.5 text-xs text-amber-700">
+              <li>7–30 days before check-in: 50% refund</li>
+              <li>Less than 7 days before check-in: Non-refundable</li>
+            </ul>
+          </div>
 
         {bookingStatus === "error" && (
           <div className="mt-3 flex items-start gap-2 rounded-lg bg-red-50 p-3 text-sm text-red-700">
