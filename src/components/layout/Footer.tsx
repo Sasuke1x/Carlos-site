@@ -1,77 +1,47 @@
 import Link from "next/link";
-import { Mail, MapPin } from "lucide-react";
-
-const COMPANY_LINKS = [
-  { label: "About", href: "/about" },
-  { label: "Properties", href: "/properties" },
-  { label: "Contact", href: "/contact" },
-];
+import Image from "next/image";
+import { Mail, MapPin, Phone } from "lucide-react";
 
 const SERVICES_LINKS = [
+  { label: "Properties", href: "/properties" },
   { label: "Property Management", href: "/property-management" },
-  { label: "Renovation & Fix/Flip", href: "/renovation" },
+  { label: "Renovation", href: "/renovation" },
   { label: "AI & Automation", href: "/ai-automation" },
 ];
 
 const Footer = () => {
   return (
-    <footer className="border-t border-gray-200 bg-gray-50">
-      <div className="mx-auto max-w-[1440px] px-6 py-12 lg:px-10">
-        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
-          <div className="lg:col-span-1">
-            <Link href="/" className="text-lg font-bold tracking-tight" aria-label="CEO Hosting U — Go to homepage">
-              <span className="text-[13px] font-semibold uppercase tracking-widest text-[#d4a847]">CEO</span>
-              <span className="ml-1 text-gray-900">Hosting</span>
-              <span className="text-[#d4a847]"> U</span>
+    <footer className="bg-[#022c22] text-white">
+      <div className="mx-auto max-w-7xl px-6 py-16">
+        <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-4">
+          {/* Column 1: Brand */}
+          <div>
+            <Link href="/" className="inline-block mb-4">
+              <Image
+                src="/images/branding/ceo-hosting-u-logo.png"
+                alt="CEO Hosting U"
+                width={160}
+                height={48}
+                className="h-10 w-auto brightness-0 invert"
+              />
             </Link>
-            <p className="mt-3 text-[13px] leading-relaxed text-gray-500">
-              Professionally operated short-term and corporate rentals
-              throughout the Triad region of North Carolina.
+            <p className="text-sm text-gray-300 leading-relaxed">
+              Family-owned. Professionally operated. Furnished housing and
+              property management in the North Carolina Triad.
             </p>
-            <div className="mt-4 flex flex-col gap-2">
-              <span className="flex items-center gap-2 text-[13px] text-gray-500">
-                <MapPin className="h-3.5 w-3.5 text-[#d4a847]" aria-hidden="true" />
-                Lexington, NC
-              </span>
-              <a
-                href="mailto:Mizeenterprise1@gmail.com"
-                className="flex items-center gap-2 text-[13px] text-gray-500 transition-colors hover:text-gray-800"
-                aria-label="Send email to Mizeenterprise1@gmail.com"
-              >
-                <Mail className="h-3.5 w-3.5 text-[#d4a847]" aria-hidden="true" />
-                Mizeenterprise1@gmail.com
-              </a>
-            </div>
           </div>
 
+          {/* Column 2: Services */}
           <div>
-            <h3 className="text-xs font-semibold uppercase tracking-wider text-gray-900">
-              Company
-            </h3>
-            <ul className="mt-4 flex flex-col gap-2.5">
-              {COMPANY_LINKS.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-[13px] text-gray-500 transition-colors hover:text-gray-900"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="text-xs font-semibold uppercase tracking-wider text-gray-900">
+            <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-[#d4a847]">
               Services
             </h3>
-            <ul className="mt-4 flex flex-col gap-2.5">
+            <ul className="space-y-3">
               {SERVICES_LINKS.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-[13px] text-gray-500 transition-colors hover:text-gray-900"
+                    className="text-sm text-gray-300 transition-colors hover:text-white"
                   >
                     {link.label}
                   </Link>
@@ -80,37 +50,69 @@ const Footer = () => {
             </ul>
           </div>
 
+          {/* Column 3: Contact */}
           <div>
-            <h3 className="text-xs font-semibold uppercase tracking-wider text-gray-900">
+            <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-[#d4a847]">
+              Contact
+            </h3>
+            <ul className="space-y-3">
+              <li className="flex items-start gap-2 text-sm text-gray-300">
+                <Mail className="mt-0.5 h-4 w-4 flex-shrink-0 text-[#d4a847]" />
+                <a href="mailto:Mizeenterprise1@gmail.com" className="hover:text-white transition-colors">
+                  Mizeenterprise1@gmail.com
+                </a>
+              </li>
+              <li className="flex items-start gap-2 text-sm text-gray-300">
+                <Phone className="mt-0.5 h-4 w-4 flex-shrink-0 text-[#d4a847]" />
+                <a href="tel:+13368835635" className="hover:text-white transition-colors">
+                  (336) 883-5635
+                </a>
+              </li>
+              <li className="flex items-start gap-2 text-sm text-gray-300">
+                <MapPin className="mt-0.5 h-4 w-4 flex-shrink-0 text-[#d4a847]" />
+                <span>Lexington, NC — Serving the Triad</span>
+              </li>
+            </ul>
+          </div>
+
+          {/* Column 4: Quick Links */}
+          <div>
+            <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-[#d4a847]">
               Quick Links
             </h3>
-            <ul className="mt-4 flex flex-col gap-2.5">
+            <ul className="space-y-3">
               <li>
                 <Link
                   href="/properties"
-                  className="text-[13px] text-gray-500 transition-colors hover:text-gray-900"
+                  className="text-sm text-gray-300 transition-colors hover:text-white"
                 >
                   Book a Stay
                 </Link>
               </li>
               <li>
-                <a
-                  href="mailto:Mizeenterprise1@gmail.com"
-                  className="text-[13px] text-gray-500 transition-colors hover:text-gray-900"
+                <Link
+                  href="/vip"
+                  className="text-sm text-gray-300 transition-colors hover:text-white"
                 >
-                  Email Us
-                </a>
+                  Join VIP Club
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/contact"
+                  className="text-sm text-gray-300 transition-colors hover:text-white"
+                >
+                  Contact Us
+                </Link>
               </li>
             </ul>
           </div>
         </div>
 
-        <div className="mt-10 flex flex-col items-center justify-between gap-3 border-t border-gray-200 pt-6 sm:flex-row">
+        {/* Copyright */}
+        <div className="mt-12 border-t border-white/10 pt-8 text-center">
           <p className="text-xs text-gray-400">
             &copy; {new Date().getFullYear()} CEO Hosting U. All rights reserved.
-          </p>
-          <p className="text-xs text-gray-400">
-            CEO: Carlos E Ontiveros
           </p>
         </div>
       </div>
