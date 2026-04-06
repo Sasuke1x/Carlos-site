@@ -11,7 +11,7 @@ import {
 } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "AI & Business Automation | CEO HostingYou",
+  title: "AI & Business Automation | CEO Hosting U",
   description:
     "Helping local businesses run efficiently and modernize operations with website development, AI chatbots, marketing funnels, CRM automation, and more.",
 };

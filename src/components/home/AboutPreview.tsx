@@ -20,7 +20,7 @@ const AboutPreview = () => {
 
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#d4a847]">
-              About CEO HostingYou
+              About CEO Hosting U
             </p>
             <h2
               id="about-preview-heading"
@@ -44,7 +44,7 @@ const AboutPreview = () => {
             <Link
               href="/about"
               className="group mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#065f46] transition-colors hover:text-[#053e2e]"
-              aria-label="Learn more about CEO HostingYou"
+              aria-label="Learn more about CEO Hosting U"
             >
               Learn more
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />

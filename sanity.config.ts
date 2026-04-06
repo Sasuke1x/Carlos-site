@@ -5,7 +5,7 @@ import { schemaTypes } from "./src/sanity/schemaTypes";
 
 export default defineConfig({
   name: "hosting-you",
-  title: "CEO HostingYou CMS",
+  title: "CEO Hosting U CMS",
 
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || "",
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || "production",

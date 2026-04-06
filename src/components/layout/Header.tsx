@@ -61,7 +61,7 @@ const Header = () => {
         <Link
           href="/"
           className="flex items-baseline gap-0.5 text-xl font-bold tracking-tight"
-          aria-label="CEO HostingYou — Go to homepage"
+          aria-label="CEO Hosting U — Go to homepage"
         >
           <span className="text-[13px] font-semibold uppercase tracking-widest text-[#d4a847]">
             CEO
@@ -69,7 +69,7 @@ const Header = () => {
           <span className={`ml-1 transition-colors duration-300 ${useTransparent ? "text-white" : "text-[#065f46]"}`}>
             Hosting
           </span>
-          <span className="text-[#d4a847]">You</span>
+          <span className="text-[#d4a847]"> U</span>
         </Link>
 
         <nav className="hidden items-center gap-1 lg:flex" aria-label="Main navigation">
@@ -140,11 +140,11 @@ const Header = () => {
             href="/"
             onClick={handleCloseMobileMenu}
             className="text-lg font-bold tracking-tight"
-            aria-label="CEO HostingYou — Go to homepage"
+            aria-label="CEO Hosting U — Go to homepage"
           >
             <span className="text-[13px] font-semibold uppercase tracking-widest text-[#d4a847]">CEO</span>
             <span className="ml-1 text-[#065f46]">Hosting</span>
-            <span className="text-[#d4a847]">You</span>
+            <span className="text-[#d4a847]"> U</span>
           </Link>
           <button
             type="button"

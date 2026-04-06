@@ -16,12 +16,13 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "CEO HostingYou | Modern Furnished Homes in the Triad, NC",
-    template: "%s | CEO HostingYou",
+    default: "CEO Hosting U | Furnished Housing & Property Management in the Triad",
+    template: "%s | CEO Hosting U",
   },
   description:
-    "Professionally managed short-term and corporate housing in Lexington, NC serving the greater Triad region. Book your stay directly for the best rates.",
+    "Furnished housing and property management in the North Carolina Triad. Short-term, mid-term, insurance housing, and investor solutions in Winston-Salem, Greensboro, High Point, and Lexington.",
   keywords: [
+    "CEO Hosting U",
     "Corporate Housing Lexington NC",
     "Short-Term Rental Triad NC",
     "Furnished Rentals Near Winston-Salem",
@@ -30,11 +31,18 @@ export const metadata: Metadata = {
     "furnished homes Greensboro High Point",
   ],
   openGraph: {
-    title: "CEO HostingYou | Modern Furnished Homes in the Triad, NC",
+    title: "CEO Hosting U — Furnished Housing & Property Management in the Triad",
     description:
-      "Professionally managed short-term and corporate housing in Lexington, NC serving the greater Triad region.",
+      "Short-term and mid-term furnished housing in Winston-Salem, Greensboro, High Point, and Lexington NC.",
     type: "website",
-    locale: "en_US",
+    images: ["/images/og-preview.png"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "CEO Hosting U — Furnished Housing & Property Management in the Triad",
+    description:
+      "Short-term and mid-term furnished housing in Winston-Salem, Greensboro, High Point, and Lexington NC.",
+    images: ["/images/og-preview.png"],
   },
 };
 

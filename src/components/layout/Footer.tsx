@@ -19,10 +19,10 @@ const Footer = () => {
       <div className="mx-auto max-w-[1440px] px-6 py-12 lg:px-10">
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
           <div className="lg:col-span-1">
-            <Link href="/" className="text-lg font-bold tracking-tight" aria-label="CEO HostingYou — Go to homepage">
+            <Link href="/" className="text-lg font-bold tracking-tight" aria-label="CEO Hosting U — Go to homepage">
               <span className="text-[13px] font-semibold uppercase tracking-widest text-[#d4a847]">CEO</span>
               <span className="ml-1 text-gray-900">Hosting</span>
-              <span className="text-[#d4a847]">You</span>
+              <span className="text-[#d4a847]"> U</span>
             </Link>
             <p className="mt-3 text-[13px] leading-relaxed text-gray-500">
               Professionally operated short-term and corporate rentals
@@ -107,7 +107,7 @@ const Footer = () => {
 
         <div className="mt-10 flex flex-col items-center justify-between gap-3 border-t border-gray-200 pt-6 sm:flex-row">
           <p className="text-xs text-gray-400">
-            &copy; {new Date().getFullYear()} CEO HostingYou. All rights reserved.
+            &copy; {new Date().getFullYear()} CEO Hosting U. All rights reserved.
           </p>
           <p className="text-xs text-gray-400">
             CEO: Carlos E Ontiveros

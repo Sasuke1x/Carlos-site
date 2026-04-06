@@ -10,7 +10,7 @@ import {
 } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "About Us | CEO HostingYou",
+  title: "About Us | CEO Hosting U",
   description:
     "Family-owned, professionally operated short-term rental company based in Lexington, NC. Learn about our mission, team, and commitment to quality.",
 };
@@ -145,7 +145,7 @@ const AboutPage = () => {
             <p className="text-lg font-semibold text-green-900">
               Carlos E Ontiveros
             </p>
-            <p className="text-gold-500">Founder, CEO HostingYou</p>
+            <p className="text-gold-500">Founder, CEO Hosting U</p>
           </div>
         </div>
       </section>

@@ -12,7 +12,7 @@ import {
 import ConsultationForm from "@/components/ConsultationForm";
 
 export const metadata: Metadata = {
-  title: "Property Management | CEO HostingYou",
+  title: "Property Management | CEO Hosting U",
   description:
     "Full-service short-term and corporate rental management for property owners in the Triad region. Multi-platform listings, guest communication, cleaning, and revenue optimization.",
 };

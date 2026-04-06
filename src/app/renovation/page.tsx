@@ -12,7 +12,7 @@ import {
 } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Renovation & Fix/Flip | CEO HostingYou",
+  title: "Renovation & Fix/Flip | CEO Hosting U",
   description:
     "Strategic property renovations, layout improvements, and cosmetic enhancements designed to increase rental performance and long-term value in the Triad region.",
 };

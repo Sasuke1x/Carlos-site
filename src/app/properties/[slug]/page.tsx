@@ -32,11 +32,11 @@ export const generateMetadata = async ({
   const property = getPropertyBySlug(slug);
 
   if (!property) {
-    return { title: "Property Not Found | CEO HostingYou" };
+    return { title: "Property Not Found | CEO Hosting U" };
   }
 
   return {
-    title: `${property.name} | CEO HostingYou`,
+    title: `${property.name} | CEO Hosting U`,
     description: property.summary,
   };
 };

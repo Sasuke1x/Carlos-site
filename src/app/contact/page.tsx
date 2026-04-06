@@ -3,9 +3,9 @@ import { Mail, MapPin, Clock } from "lucide-react";
 import ContactForm from "@/components/ContactForm";
 
 export const metadata: Metadata = {
-  title: "Contact Us | CEO HostingYou",
+  title: "Contact Us | CEO Hosting U",
   description:
-    "Get in touch with CEO HostingYou. Reach out for guest inquiries, property management, or service questions. Based in Lexington, NC, serving the Triad region.",
+    "Get in touch with CEO Hosting U. Reach out for guest inquiries, property management, or service questions. Based in Lexington, NC, serving the Triad region.",
 };
 
 const contactDetails = [

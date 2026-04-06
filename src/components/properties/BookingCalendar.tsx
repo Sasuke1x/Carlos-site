@@ -432,7 +432,7 @@ const BookingCalendar = ({
         </button>
 
         <p className="mt-3 text-center text-[11px] text-gray-400">
-          Your reservation will be managed through CEO HostingYou
+          Your reservation will be managed through CEO Hosting U
         </p>
       </div>
     );
