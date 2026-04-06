@@ -302,69 +302,28 @@ const PropertyDetailPage = async ({ params }: PageProps) => {
                 </div>
               </div>
             </section>
+
+            {/* Cancellation Policy */}
+            <section className="mt-6 rounded-xl bg-amber-50 border border-amber-100 p-5">
+              <h3 className="text-sm font-semibold text-amber-800">Cancellation Policy</h3>
+              <ul className="mt-2 space-y-1 text-sm text-amber-700">
+                <li>7–30 days before check-in: 50% refund</li>
+                <li>Less than 7 days before check-in: Non-refundable</li>
+              </ul>
+            </section>
           </div>
 
-          {/* Right column - Booking CTA (sticky sidebar) */}
+          {/* Right column - Booking Widget (sticky sidebar) */}
           <aside className="lg:col-span-1">
-            <div className="sticky top-36 rounded-2xl border border-neutral-200 bg-white p-5 shadow-lg">
-              <p className="text-xs font-medium uppercase tracking-wider text-gray-400">
-                Book This Property
-              </p>
-
-              <div className="mt-3 -mx-5">
-                <iframe
-                  id="booking-iframe"
-                  sandbox="allow-top-navigation allow-scripts allow-same-origin"
-                  style={{ width: "100%", height: "900px" }}
-                  frameBorder="0"
-                  src={`https://booking.hospitable.com/widget/${HOSPITABLE_SITE_ID}/${property.widget_id}`}
-                  title={`Book ${property.name}`}
-                />
-              </div>
-
-              {/* Cancellation Policy */}
-              <div className="mt-4 rounded-lg bg-amber-50 border border-amber-100 p-3">
-                <p className="text-xs font-semibold text-amber-800">Cancellation Policy</p>
-                <ul className="mt-1 space-y-0.5 text-xs text-amber-700">
-                  <li>7–30 days before check-in: 50% refund</li>
-                  <li>Less than 7 days before check-in: Non-refundable</li>
-                </ul>
-              </div>
-
-              <hr className="my-4 border-neutral-100" />
-
-              <div className="space-y-2 text-[13px] text-gray-500">
-                <div className="flex justify-between">
-                  <span>Bedrooms</span>
-                  <span className="font-medium text-gray-800">
-                    {property.capacity.bedrooms}
-                  </span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Bathrooms</span>
-                  <span className="font-medium text-gray-800">
-                    {property.capacity.bathrooms}
-                  </span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Max Guests</span>
-                  <span className="font-medium text-gray-800">
-                    {property.capacity.guests}
-                  </span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Check-in</span>
-                  <span className="font-medium text-gray-800">
-                    {property.checkin}
-                  </span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Check-out</span>
-                  <span className="font-medium text-gray-800">
-                    {property.checkout}
-                  </span>
-                </div>
-              </div>
+            <div className="sticky top-36 overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-lg">
+              <iframe
+                id="booking-iframe"
+                sandbox="allow-top-navigation allow-scripts allow-same-origin"
+                style={{ width: "100%", height: "520px", border: "none" }}
+                frameBorder="0"
+                src={`https://booking.hospitable.com/widget/${HOSPITABLE_SITE_ID}/${property.widget_id}`}
+                title={`Book ${property.name}`}
+              />
             </div>
           </aside>
         </div>
