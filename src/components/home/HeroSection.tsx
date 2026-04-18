@@ -5,44 +5,87 @@ import Link from "next/link";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
-const heroSlides = [
-  {
-    src: "/images/properties/mize-road/b1313904-799b-448c-ad42-5ed82a5880e5.jpg-2.avif",
-    name: "Modern 3BR Family Home Near Park",
-    slug: "mize-road-retreat",
-  },
-  {
-    src: "/images/properties/salisbury-unit-a/4d4bdee3-94a7-448e-a0ce-64846256a3f7.jpeg.avif",
-    name: "Cozy 2BR Condo in Downtown Lexington",
-    slug: "downtown-lexington-condo",
-  },
-  {
-    src: "/images/properties/salisbury-apt-b/440cfc28-d4e4-44a7-b5d2-77900b027115.jpeg-2.avif",
-    name: "Modern 3BR Apartment Near I-85",
-    slug: "modern-lexington-apartment",
-  },
-  {
-    src: "/images/properties/linwood-retreat/fd06c053-4bca-4895-9e56-4d18ee5aa2c0.jpeg-2.avif",
-    name: "Family 3BR Retreat with Hot Tub",
-    slug: "family-retreat-hot-tub",
-  },
-];
+import {
+  DEFAULT_HERO_CAROUSEL,
+  DEFAULT_HOMEPAGE,
+} from "@/sanity/fallbacks";
+import { imageUrl } from "@/sanity/lib/image";
+import type { CarouselSlide } from "@/sanity/types";
 
-const HeroSection = () => {
+export interface HeroSectionProps {
+  headlineStart?: string;
+  headlineGreen?: string;
+  headlineEnd?: string;
+  subheadline?: string;
+  supportLine?: string;
+  primaryCtaLabel?: string;
+  primaryCtaHref?: string;
+  secondaryCtaLabel?: string;
+  secondaryCtaHref?: string;
+  carouselSlides?: CarouselSlide[];
+}
+
+interface ResolvedSlide {
+  src: string;
+  name: string;
+  slug: string;
+  alt: string;
+}
+
+function resolveSlides(slides: CarouselSlide[] | undefined): ResolvedSlide[] {
+  const fromSanity = (slides ?? [])
+    .map((slide) => {
+      const url = imageUrl(slide.image, 1200);
+      if (!url) return null;
+      return {
+        src: url,
+        name: slide.propertyName ?? "",
+        slug: slide.propertySlug ?? "",
+        alt: slide.image?.alt ?? slide.propertyName ?? "Featured property",
+      };
+    })
+    .filter((s): s is ResolvedSlide => s !== null);
+
+  if (fromSanity.length > 0) return fromSanity;
+
+  return DEFAULT_HERO_CAROUSEL.map((s) => ({
+    src: s.src,
+    name: s.name,
+    slug: s.slug,
+    alt: s.name,
+  }));
+}
+
+const HeroSection = ({
+  headlineStart = DEFAULT_HOMEPAGE.heroHeadlineStart,
+  headlineGreen = DEFAULT_HOMEPAGE.heroHeadlineGreen,
+  headlineEnd = DEFAULT_HOMEPAGE.heroHeadlineEnd,
+  subheadline = DEFAULT_HOMEPAGE.heroSubheadline,
+  supportLine = DEFAULT_HOMEPAGE.heroSupportLine,
+  primaryCtaLabel = DEFAULT_HOMEPAGE.heroPrimaryCtaLabel,
+  primaryCtaHref = DEFAULT_HOMEPAGE.heroPrimaryCtaHref,
+  secondaryCtaLabel = DEFAULT_HOMEPAGE.heroSecondaryCtaLabel,
+  secondaryCtaHref = DEFAULT_HOMEPAGE.heroSecondaryCtaHref,
+  carouselSlides,
+}: HeroSectionProps) => {
+  const heroSlides = resolveSlides(carouselSlides);
   const [current, setCurrent] = useState(0);
 
   const next = useCallback(() => {
     setCurrent((prev) => (prev + 1) % heroSlides.length);
-  }, []);
+  }, [heroSlides.length]);
 
   const prev = () => {
     setCurrent((prev) => (prev - 1 + heroSlides.length) % heroSlides.length);
   };
 
   useEffect(() => {
+    if (heroSlides.length <= 1) return;
     const timer = setInterval(next, 5000);
     return () => clearInterval(timer);
-  }, [next]);
+  }, [next, heroSlides.length]);
+
+  const activeSlide = heroSlides[current] ?? heroSlides[0];
 
   return (
     <section className="bg-white">
@@ -50,29 +93,33 @@ const HeroSection = () => {
         <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2">
           <div>
             <h1 className="text-4xl font-bold leading-tight tracking-tight text-gray-900 sm:text-5xl">
-              Furnished Housing &{" "}
-              <span className="text-[#065f46]">Property Management</span>{" "}
-              in the Triad
+              {headlineStart}{" "}
+              <span className="text-[#065f46]">{headlineGreen}</span>{" "}
+              {headlineEnd}
             </h1>
-            <p className="mt-4 text-lg text-gray-600">
-              For Travelers, Homeowners & Investors
-            </p>
-            <p className="mt-2 text-sm text-gray-400">
-              Short-term · Mid-term · Insurance Housing · Investor Solutions
-            </p>
+            {subheadline ? (
+              <p className="mt-4 text-lg text-gray-600">{subheadline}</p>
+            ) : null}
+            {supportLine ? (
+              <p className="mt-2 text-sm text-gray-400">{supportLine}</p>
+            ) : null}
             <div className="mt-8 flex flex-wrap gap-4">
-              <Link
-                href="/properties"
-                className="inline-flex items-center rounded-lg bg-[#065f46] px-6 py-3 text-sm font-semibold text-white shadow-md transition-all hover:bg-[#065f46]/90 hover:shadow-lg"
-              >
-                Book a Stay
-              </Link>
-              <Link
-                href="/property-management"
-                className="inline-flex items-center rounded-lg border-2 border-[#065f46] px-6 py-3 text-sm font-semibold text-[#065f46] transition-all hover:bg-[#065f46]/5"
-              >
-                Partner With Us
-              </Link>
+              {primaryCtaLabel && primaryCtaHref ? (
+                <Link
+                  href={primaryCtaHref}
+                  className="inline-flex items-center rounded-lg bg-[#065f46] px-6 py-3 text-sm font-semibold text-white shadow-md transition-all hover:bg-[#065f46]/90 hover:shadow-lg"
+                >
+                  {primaryCtaLabel}
+                </Link>
+              ) : null}
+              {secondaryCtaLabel && secondaryCtaHref ? (
+                <Link
+                  href={secondaryCtaHref}
+                  className="inline-flex items-center rounded-lg border-2 border-[#065f46] px-6 py-3 text-sm font-semibold text-[#065f46] transition-all hover:bg-[#065f46]/5"
+                >
+                  {secondaryCtaLabel}
+                </Link>
+              ) : null}
             </div>
           </div>
 
@@ -83,7 +130,7 @@ const HeroSection = () => {
                 <Image
                   key={slide.src}
                   src={slide.src}
-                  alt={slide.name}
+                  alt={slide.alt}
                   fill
                   className={`object-cover transition-opacity duration-700 ${
                     index === current ? "opacity-100" : "opacity-0"
@@ -93,54 +140,63 @@ const HeroSection = () => {
                 />
               ))}
 
-              {/* Navigation Arrows */}
-              <button
-                onClick={prev}
-                className="absolute left-3 top-1/2 -translate-y-1/2 rounded-full bg-black/30 p-1.5 text-white backdrop-blur-sm transition-all hover:bg-black/50"
-                aria-label="Previous property"
-                type="button"
-              >
-                <ChevronLeft className="h-5 w-5" />
-              </button>
-              <button
-                onClick={next}
-                className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full bg-black/30 p-1.5 text-white backdrop-blur-sm transition-all hover:bg-black/50"
-                aria-label="Next property"
-                type="button"
-              >
-                <ChevronRight className="h-5 w-5" />
-              </button>
-
-              {/* Dots */}
-              <div className="absolute bottom-3 left-1/2 flex -translate-x-1/2 gap-2">
-                {heroSlides.map((_, index) => (
+              {heroSlides.length > 1 ? (
+                <>
                   <button
-                    key={index}
-                    onClick={() => setCurrent(index)}
-                    className={`h-2 rounded-full transition-all ${
-                      index === current
-                        ? "w-6 bg-white"
-                        : "w-2 bg-white/50 hover:bg-white/70"
-                    }`}
-                    aria-label={`Go to ${heroSlides[index].name}`}
+                    onClick={prev}
+                    className="absolute left-3 top-1/2 -translate-y-1/2 rounded-full bg-black/30 p-1.5 text-white backdrop-blur-sm transition-all hover:bg-black/50"
+                    aria-label="Previous property"
                     type="button"
-                  />
-                ))}
-              </div>
+                  >
+                    <ChevronLeft className="h-5 w-5" />
+                  </button>
+                  <button
+                    onClick={next}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full bg-black/30 p-1.5 text-white backdrop-blur-sm transition-all hover:bg-black/50"
+                    aria-label="Next property"
+                    type="button"
+                  >
+                    <ChevronRight className="h-5 w-5" />
+                  </button>
+
+                  <div className="absolute bottom-3 left-1/2 flex -translate-x-1/2 gap-2">
+                    {heroSlides.map((slide, index) => (
+                      <button
+                        key={slide.src}
+                        onClick={() => setCurrent(index)}
+                        className={`h-2 rounded-full transition-all ${
+                          index === current
+                            ? "w-6 bg-white"
+                            : "w-2 bg-white/50 hover:bg-white/70"
+                        }`}
+                        aria-label={`Go to ${slide.name}`}
+                        type="button"
+                      />
+                    ))}
+                  </div>
+                </>
+              ) : null}
             </div>
 
-            {/* Property Title Below Image */}
-            <Link
-              href={`/properties/${heroSlides[current].slug}`}
-              className="mt-3 flex items-center justify-between rounded-lg bg-gray-50 px-4 py-3 transition-colors hover:bg-gray-100"
-            >
-              <span className="text-sm font-semibold text-gray-800">
-                {heroSlides[current].name}
-              </span>
-              <span className="text-xs font-medium text-[#065f46]">
-                View Property →
-              </span>
-            </Link>
+            {activeSlide && activeSlide.slug ? (
+              <Link
+                href={`/properties/${activeSlide.slug}`}
+                className="mt-3 flex items-center justify-between rounded-lg bg-gray-50 px-4 py-3 transition-colors hover:bg-gray-100"
+              >
+                <span className="text-sm font-semibold text-gray-800">
+                  {activeSlide.name}
+                </span>
+                <span className="text-xs font-medium text-[#065f46]">
+                  View Property →
+                </span>
+              </Link>
+            ) : activeSlide ? (
+              <div className="mt-3 flex items-center justify-between rounded-lg bg-gray-50 px-4 py-3">
+                <span className="text-sm font-semibold text-gray-800">
+                  {activeSlide.name}
+                </span>
+              </div>
+            ) : null}
           </div>
         </div>
       </div>

@@ -9,11 +9,19 @@ import {
   Quote,
 } from "lucide-react";
 
-export const metadata: Metadata = {
-  title: "About Us | CEO Hosting U",
-  description:
-    "Family-owned, professionally operated short-term rental company based in Lexington, NC. Learn about our mission, team, and commitment to quality.",
-};
+import { sanityFetch } from "@/sanity/lib/fetch";
+import { buildPageMetadata } from "@/sanity/lib/metadata";
+import { aboutPageQuery } from "@/sanity/lib/queries";
+import type { AboutPage } from "@/sanity/types";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const page = await sanityFetch<AboutPage>(aboutPageQuery);
+  return buildPageMetadata(page?.seo, {
+    title: "About Us | CEO Hosting U",
+    description:
+      "Family-owned, professionally operated short-term rental company based in Lexington, NC. Learn about our mission, team, and commitment to quality.",
+  });
+}
 
 const values = [
   {

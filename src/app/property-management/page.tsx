@@ -11,11 +11,19 @@ import {
 } from "lucide-react";
 import ConsultationForm from "@/components/ConsultationForm";
 
-export const metadata: Metadata = {
-  title: "Property Management | CEO Hosting U",
-  description:
-    "Full-service short-term and corporate rental management for property owners in the Triad region. Multi-platform listings, guest communication, cleaning, and revenue optimization.",
-};
+import { sanityFetch } from "@/sanity/lib/fetch";
+import { buildPageMetadata } from "@/sanity/lib/metadata";
+import { managementPageQuery } from "@/sanity/lib/queries";
+import type { ManagementPage } from "@/sanity/types";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const page = await sanityFetch<ManagementPage>(managementPageQuery);
+  return buildPageMetadata(page?.seo, {
+    title: "Property Management | CEO Hosting U",
+    description:
+      "Full-service short-term and corporate rental management for property owners in the Triad region. Multi-platform listings, guest communication, cleaning, and revenue optimization.",
+  });
+}
 
 const services = [
   {

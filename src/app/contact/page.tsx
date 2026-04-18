@@ -2,11 +2,19 @@ import type { Metadata } from "next";
 import { Mail, MapPin, Clock } from "lucide-react";
 import ContactForm from "@/components/ContactForm";
 
-export const metadata: Metadata = {
-  title: "Contact Us | CEO Hosting U",
-  description:
-    "Get in touch with CEO Hosting U. Reach out for guest inquiries, property management, or service questions. Based in Lexington, NC, serving the Triad region.",
-};
+import { sanityFetch } from "@/sanity/lib/fetch";
+import { buildPageMetadata } from "@/sanity/lib/metadata";
+import { contactPageQuery } from "@/sanity/lib/queries";
+import type { ContactPage } from "@/sanity/types";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const page = await sanityFetch<ContactPage>(contactPageQuery);
+  return buildPageMetadata(page?.seo, {
+    title: "Contact Us | CEO Hosting U",
+    description:
+      "Get in touch with CEO Hosting U. Reach out for guest inquiries, property management, or service questions. Based in Lexington, NC, serving the Triad region.",
+  });
+}
 
 const contactDetails = [
   {

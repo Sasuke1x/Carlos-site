@@ -10,11 +10,19 @@ import {
   ArrowRight,
 } from "lucide-react";
 
-export const metadata: Metadata = {
-  title: "AI & Business Automation | CEO Hosting U",
-  description:
-    "Helping local businesses run efficiently and modernize operations with website development, AI chatbots, marketing funnels, CRM automation, and more.",
-};
+import { sanityFetch } from "@/sanity/lib/fetch";
+import { buildPageMetadata } from "@/sanity/lib/metadata";
+import { aiAutomationPageQuery } from "@/sanity/lib/queries";
+import type { AiAutomationPage } from "@/sanity/types";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const page = await sanityFetch<AiAutomationPage>(aiAutomationPageQuery);
+  return buildPageMetadata(page?.seo, {
+    title: "AI & Business Automation | CEO Hosting U",
+    description:
+      "Helping local businesses run efficiently and modernize operations with website development, AI chatbots, marketing funnels, CRM automation, and more.",
+  });
+}
 
 const services = [
   {

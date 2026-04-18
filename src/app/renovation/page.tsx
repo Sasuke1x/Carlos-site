@@ -10,11 +10,19 @@ import {
   ArrowRight,
 } from "lucide-react";
 
-export const metadata: Metadata = {
-  title: "Renovation & Fix/Flip | CEO Hosting U",
-  description:
-    "Strategic property renovations, layout improvements, and cosmetic enhancements designed to increase rental performance and long-term value in the Triad region.",
-};
+import { sanityFetch } from "@/sanity/lib/fetch";
+import { buildPageMetadata } from "@/sanity/lib/metadata";
+import { renovationPageQuery } from "@/sanity/lib/queries";
+import type { RenovationPage } from "@/sanity/types";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const page = await sanityFetch<RenovationPage>(renovationPageQuery);
+  return buildPageMetadata(page?.seo, {
+    title: "Renovation & Fix/Flip | CEO Hosting U",
+    description:
+      "Strategic property renovations, layout improvements, and cosmetic enhancements designed to increase rental performance and long-term value in the Triad region.",
+  });
+}
 
 const services = [
   {

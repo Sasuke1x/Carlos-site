@@ -6,6 +6,16 @@ import Link from "next/link";
 import Image from "next/image";
 import { Menu, X, Phone } from "lucide-react";
 
+import { DEFAULT_SITE_SETTINGS, FALLBACK_LOGO_SRC } from "@/sanity/fallbacks";
+
+export interface HeaderProps {
+  siteName?: string;
+  logoUrl?: string | null;
+  logoAlt?: string;
+  contactPhone?: string;
+  phoneDisplay?: string;
+}
+
 const NAV_ITEMS = [
   { label: "Home", href: "/" },
   { label: "Properties", href: "/properties" },
@@ -13,10 +23,20 @@ const NAV_ITEMS = [
   { label: "Renovation", href: "/renovation" },
 ];
 
-const Header = () => {
+const Header = ({
+  siteName = DEFAULT_SITE_SETTINGS.siteName,
+  logoUrl,
+  logoAlt,
+  contactPhone = DEFAULT_SITE_SETTINGS.contactPhone,
+  phoneDisplay = DEFAULT_SITE_SETTINGS.phoneDisplay,
+}: HeaderProps) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
+
+  const resolvedLogo = logoUrl ?? FALLBACK_LOGO_SRC;
+  const resolvedLogoAlt = logoAlt ?? siteName ?? "CEO Hosting U";
+  const telHref = contactPhone ? `tel:${contactPhone}` : undefined;
 
   const handleScroll = useCallback(() => {
     setIsScrolled(window.scrollY > 20);
@@ -52,8 +72,8 @@ const Header = () => {
           {/* Logo */}
           <Link href="/" className="flex-shrink-0">
             <Image
-              src="/images/branding/ceo-hosting-u-logo.png"
-              alt="CEO Hosting U"
+              src={resolvedLogo}
+              alt={resolvedLogoAlt}
               width={200}
               height={60}
               className="h-14 w-auto sm:h-20 lg:h-24"
@@ -112,8 +132,8 @@ const Header = () => {
           <div className="flex items-center justify-between px-5 py-4 border-b border-gray-100">
             <Link href="/" onClick={closeMenu}>
               <Image
-                src="/images/branding/ceo-hosting-u-logo.png"
-                alt="CEO Hosting U"
+                src={resolvedLogo}
+                alt={resolvedLogoAlt}
                 width={160}
                 height={48}
                 className="h-14 w-auto"
@@ -159,13 +179,15 @@ const Header = () => {
             >
               Book Now
             </Link>
-            <a
-              href="tel:+13368835635"
-              className="flex w-full items-center justify-center gap-2 rounded-xl border-2 border-[#d4a847] px-5 py-4 text-base font-semibold text-[#d4a847] transition-colors hover:bg-[#d4a847]/5"
-            >
-              <Phone className="h-4 w-4" />
-              (336) 883-5635
-            </a>
+            {telHref && phoneDisplay ? (
+              <a
+                href={telHref}
+                className="flex w-full items-center justify-center gap-2 rounded-xl border-2 border-[#d4a847] px-5 py-4 text-base font-semibold text-[#d4a847] transition-colors hover:bg-[#d4a847]/5"
+              >
+                <Phone className="h-4 w-4" />
+                {phoneDisplay}
+              </a>
+            ) : null}
           </div>
         </div>
       )}
