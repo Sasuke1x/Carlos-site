@@ -180,32 +180,285 @@ export const DEFAULT_HERO_CAROUSEL = [
   },
 ];
 
-// ---------- Other page singletons ----------
-// These are intentionally minimal — the page components still keep
-// their hardcoded copy. Only SEO fallbacks are wired up for now.
+// ---------- About Page ----------
 
 export const DEFAULT_ABOUT_PAGE: AboutPage = {
-  heroTitle: "About CEO Hosting U",
-  heroSubtitle: "Family-owned. Professionally operated.",
+  heroTitle: "About Us",
+  heroSubtitle: "Family-Owned. Professionally Operated. Built for Comfort.",
+  storyTitle: "What We Combine",
+  // storyContent and heroDescription are rich text — leave undefined so
+  // the page renders its hardcoded paragraphs when Sanity is empty.
+  values: [
+    {
+      icon: "heart",
+      title: "Hospitality Principles",
+      description:
+        "Every decision starts with the guest experience — clean spaces, clear communication, and thoughtful touches.",
+    },
+    {
+      icon: "building",
+      title: "Real Estate Expertise",
+      description:
+        "Deep understanding of property value, market trends, and what makes a rental perform at the highest level.",
+    },
+    {
+      icon: "cog",
+      title: "Modern Automation",
+      description:
+        "Smart systems handle scheduling, pricing, and communication so nothing falls through the cracks.",
+    },
+    {
+      icon: "mappin",
+      title: "Local Knowledge",
+      description:
+        "Rooted in the Triad region with hands-on knowledge of the neighborhoods, regulations, and community.",
+    },
+  ],
 };
+
+// ---------- Property Management Page ----------
 
 export const DEFAULT_MANAGEMENT_PAGE: ManagementPage = {
   heroTitle: "Property Management",
+  heroDescription:
+    "Full-service short-term and corporate rental management for property owners in the Triad region. From listing optimization to guest communication and cleaning coordination — we take care of everything so you can enjoy consistent, hands-off income.",
+  servicesTitle: "What We Handle For You",
+  services: [
+    {
+      icon: "chart",
+      title: "Multi-Platform Listing Management",
+      description:
+        "We list and optimize your property across Airbnb, Vrbo, Booking.com, and more to maximize visibility and bookings.",
+    },
+    {
+      icon: "home",
+      title: "Direct Booking Website Exposure",
+      description:
+        "Your property gets featured on our direct booking platform, reducing commission fees and building your brand.",
+    },
+    {
+      icon: "mail",
+      title: "Guest Communication Automation",
+      description:
+        "Automated yet personal messaging handles inquiries, check-in instructions, and reviews around the clock.",
+    },
+    {
+      icon: "sparkles",
+      title: "Professional Cleaning Coordination",
+      description:
+        "Our vetted cleaning teams ensure every turnover meets hotel-level standards, every single time.",
+    },
+    {
+      icon: "chart",
+      title: "Revenue Optimization",
+      description:
+        "Dynamic pricing, seasonal adjustments, and market analysis keep your property earning at peak performance.",
+    },
+    {
+      icon: "tools",
+      title: "In-House Renovation Services",
+      description:
+        "Need upgrades? Our renovation team handles everything from cosmetic refreshes to full remodels — all in-house.",
+    },
+  ],
+  processTitle: "How It Works",
+  processSteps: [],
+  consultationCtaTitle: "Request a Consultation",
+  consultationCtaDescription:
+    "Whether you own one property or several, we'd love to learn about your goals. Fill out the form and a member of our team will reach out within 24 hours to discuss how we can help you earn more with less effort.",
 };
+
+// ---------- Renovation Page ----------
 
 export const DEFAULT_RENOVATION_PAGE: RenovationPage = {
-  heroTitle: "Renovation + Partnerships",
+  heroTitle: "Renovation & Value-Add Services",
+  heroDescription:
+    "We specialize in upgrading properties to modern standards through strategic renovations, layout improvements, and cosmetic enhancements designed to increase rental performance and long-term value. Our experience in both construction and rental operations allows us to renovate with performance in mind — not just appearance.",
+  servicesTitle: "Our Renovation Services",
+  services: [
+    {
+      icon: "shield",
+      title: "Strategic Property Assessment",
+      description:
+        "We evaluate each property to identify the highest-impact improvements for your budget and goals.",
+    },
+    {
+      icon: "building",
+      title: "Layout Optimization",
+      description:
+        "Reconfigure spaces to maximize usable square footage, improve flow, and increase guest capacity.",
+    },
+    {
+      icon: "sparkles",
+      title: "Modern Cosmetic Upgrades",
+      description:
+        "Fresh finishes, modern fixtures, and curated design choices that photograph beautifully and impress guests.",
+    },
+    {
+      icon: "tools",
+      title: "Kitchen & Bath Renovations",
+      description:
+        "Full kitchen and bathroom remodels that combine style, durability, and functionality for rental properties.",
+    },
+    {
+      icon: "chart",
+      title: "Value-Add for Rental Performance",
+      description:
+        "Every renovation decision is driven by data — we upgrade what moves the needle on nightly rates and occupancy.",
+    },
+    {
+      icon: "hardhat",
+      title: "Fix & Flip Project Management",
+      description:
+        "End-to-end project management for fix-and-flip investments, from acquisition analysis to final sale.",
+    },
+  ],
+  galleryTitle: "Our Work",
+  galleryDescription:
+    "We partner with property owners across the Triad to deliver renovation projects that increase value and rental performance.",
+  galleryItems: [
+    {
+      title: "Kitchen & Bath Remodels",
+      description:
+        "Modern upgrades that increase property value and guest satisfaction.",
+    },
+    {
+      title: "Full Property Renovations",
+      description:
+        "End-to-end project management for fix & flip or rental conversion.",
+    },
+    {
+      title: "Value-Add Improvements",
+      description:
+        "Strategic upgrades designed to maximize return on investment.",
+    },
+  ],
+  ctaTitle: "Ready to Transform Your Property?",
+  ctaDescription:
+    "Whether you're preparing a home for short-term rental, planning a flip, or simply want to increase your property's value — we'd love to talk.",
+  ctaButtonLabel: "Learn About Our Projects",
+  ctaButtonHref: "/contact",
 };
+
+// ---------- AI & Automation Page ----------
 
 export const DEFAULT_AI_AUTOMATION_PAGE: AiAutomationPage = {
-  heroTitle: "AI & Automation",
+  heroTitle: "AI & Business Automation Services",
+  heroDescription:
+    "Helping local businesses run efficiently and modernize operations. We bring enterprise-grade technology solutions to small and mid-sized businesses in the Triad region and beyond.",
+  servicesTitle: "Our Services",
+  services: [
+    {
+      icon: "home",
+      title: "Website Setup & Development",
+      description:
+        "Modern, fast, and mobile-responsive websites built to convert visitors into customers.",
+    },
+    {
+      icon: "bot",
+      title: "AI Chatbot Integration",
+      description:
+        "24/7 intelligent chatbots that handle customer inquiries, book appointments, and qualify leads automatically.",
+    },
+    {
+      icon: "chart",
+      title: "Marketing Funnels",
+      description:
+        "Strategic funnels that guide prospects from awareness to action with automated follow-up sequences.",
+    },
+    {
+      icon: "heart",
+      title: "CRM Automation",
+      description:
+        "Streamline your customer relationships with automated workflows, reminders, and pipeline management.",
+    },
+    {
+      icon: "sparkles",
+      title: "Social Media Management",
+      description:
+        "Consistent, branded content across platforms with scheduling, engagement tracking, and performance analytics.",
+    },
+    {
+      icon: "chart",
+      title: "Data Analytics & Reporting",
+      description:
+        "Actionable insights from your business data presented in clear dashboards and automated reports.",
+    },
+  ],
+  processTitle: "How It Works",
+  processSteps: [
+    {
+      step: 1,
+      title: "Discovery Call",
+      description:
+        "We learn about your business, goals, and current pain points to identify the best solutions.",
+    },
+    {
+      step: 2,
+      title: "Custom Strategy",
+      description:
+        "We build a tailored plan with clear timelines, deliverables, and measurable outcomes.",
+    },
+    {
+      step: 3,
+      title: "Launch & Optimize",
+      description:
+        "We implement, test, and continuously refine your systems for maximum performance.",
+    },
+  ],
+  ctaTitle: "Ready to Modernize Your Business?",
+  ctaDescription:
+    "Let's talk about how AI and automation can save you time, reduce costs, and grow your revenue.",
+  ctaButtonLabel: "Work With Us",
+  ctaButtonHref: "/contact",
 };
+
+// ---------- Contact Page ----------
 
 export const DEFAULT_CONTACT_PAGE: ContactPage = {
-  heroTitle: "Contact Us",
+  heroTitle: "Get in Touch",
+  heroSubtitle: "Contact",
+  heroDescription:
+    "Have a question about booking, property management, or our services? We'd love to hear from you.",
+  infoCards: [
+    {
+      icon: "mail",
+      label: "Email",
+      value: "Mizeenterprise1@gmail.com",
+      href: "mailto:Mizeenterprise1@gmail.com",
+    },
+    {
+      icon: "mappin",
+      label: "Location",
+      value: "Lexington, NC",
+    },
+    {
+      icon: "sparkles",
+      label: "Response Time",
+      value: "Within 24 hours",
+    },
+  ],
+  formTitle: "Send Us a Message",
+  formDescription:
+    "Fill out the form below and we'll get back to you as soon as possible.",
+  responseTimeMessage: "We respond to every inquiry within 24 hours.",
 };
 
+// ---------- VIP Page ----------
+
 export const DEFAULT_VIP_PAGE: VipPage = {
-  heroTitle: "CEO Hosting U VIP Club",
+  heroTitle: "Join the CEO Hosting U VIP List",
+  heroSubtitle: "VIP Club",
+  heroDescription:
+    "Save on future direct bookings + get priority access to open dates",
   discountPercent: 15,
+  emailConsentLabel:
+    "I agree to receive email offers and updates from CEO Hosting U",
+  smsConsentLabel: "I agree to receive text messages from CEO Hosting U",
+  submitButtonLabel: "Join the VIP List",
+  thankYouTitle: "Welcome to the VIP List!",
+  thankYouMessage:
+    "You're now a CEO Hosting U VIP member. Enjoy 15% off your next direct booking and priority access to open dates.",
+  thankYouButtonLabel: "Browse Properties & Book Direct",
+  thankYouButtonHref: "/properties",
 };
