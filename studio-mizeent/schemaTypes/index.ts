@@ -24,6 +24,7 @@ import {vipPage} from './singletons/vipPage'
 // Documents
 import {property} from './documents/property'
 import {testimonial} from './documents/testimonial'
+import {formSubmission} from './documents/formSubmission'
 
 // Names of document types that should behave as singletons in the Studio.
 // The custom structure uses this list to render a single editable document
@@ -69,4 +70,5 @@ export const schemaTypes = [
   // Documents
   property,
   testimonial,
+  formSubmission,
 ]

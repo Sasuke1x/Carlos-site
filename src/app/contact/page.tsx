@@ -60,7 +60,10 @@ const ContactPageRoute = async () => {
                   "Fill out the form below and we'll get back to you as soon as possible."}
               </p>
               <div className="rounded-2xl border border-gray-100 bg-white p-8 shadow-sm md:p-10">
-                <ContactForm />
+                <ContactForm
+                  thankYouTitle={data.thankYouTitle}
+                  thankYouMessage={data.thankYouMessage}
+                />
               </div>
               {data.responseTimeMessage && (
                 <p className="mt-4 text-sm text-gray-500">

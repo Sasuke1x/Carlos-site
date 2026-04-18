@@ -76,6 +76,18 @@ export const structure: StructureResolver = (S) =>
 
       S.divider(),
 
+      // Inbox — form submissions from the site
+      S.listItem()
+        .title('Submissions')
+        .id('formSubmissions')
+        .child(
+          S.documentTypeList('formSubmission')
+            .title('Submissions')
+            .defaultOrdering([{field: 'submittedAt', direction: 'desc'}]),
+        ),
+
+      S.divider(),
+
       // Collections
       S.documentTypeListItem('property').title('Properties'),
       S.documentTypeListItem('testimonial').title('Testimonials'),

@@ -205,6 +205,8 @@ export const contactPageQuery = /* groq */ `
   formTitle,
   formDescription,
   responseTimeMessage,
+  thankYouTitle,
+  thankYouMessage,
   mapEmbedUrl,
   seo${seoFragment}
 }

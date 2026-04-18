@@ -22,6 +22,7 @@ const VipForm = ({
     phone: "",
     emailConsent: false,
     smsConsent: false,
+    website: "", // honeypot
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -55,6 +56,19 @@ const VipForm = ({
 
   return (
     <form onSubmit={handleSubmit} className="mt-10 space-y-5">
+      {/* Honeypot — real users never see or fill this. */}
+      <input
+        type="text"
+        name="website"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        value={formData.website}
+        onChange={(e) =>
+          setFormData({ ...formData, website: e.target.value })
+        }
+        className="absolute left-[-9999px] h-0 w-0 opacity-0"
+      />
       <div>
         <label
           htmlFor="vip-first-name"

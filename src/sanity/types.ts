@@ -248,8 +248,37 @@ export interface ContactPage {
   formTitle?: string;
   formDescription?: string;
   responseTimeMessage?: string;
+  thankYouTitle?: string;
+  thankYouMessage?: string;
   mapEmbedUrl?: string;
   seo?: Seo;
+}
+
+// ---------- Documents (site-writable) ----------
+
+export type FormSubmissionType = "contact" | "vip";
+export type FormSubmissionStatus = "new" | "contacted" | "archived";
+export type ContactInquiryType = "guest" | "owner" | "service";
+
+export interface FormSubmission {
+  _id?: string;
+  formType?: FormSubmissionType;
+  submittedAt?: string;
+  status?: FormSubmissionStatus;
+  notes?: string;
+  email?: string;
+  phone?: string;
+  // Contact
+  name?: string;
+  message?: string;
+  inquiryType?: ContactInquiryType;
+  // VIP
+  firstName?: string;
+  emailConsent?: boolean;
+  smsConsent?: boolean;
+  // Abuse tracking
+  ipHash?: string;
+  userAgent?: string;
 }
 
 export interface VipPage {

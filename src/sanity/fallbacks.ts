@@ -442,6 +442,9 @@ export const DEFAULT_CONTACT_PAGE: ContactPage = {
   formDescription:
     "Fill out the form below and we'll get back to you as soon as possible.",
   responseTimeMessage: "We respond to every inquiry within 24 hours.",
+  thankYouTitle: "Message Sent!",
+  thankYouMessage:
+    "Thank you for reaching out. We'll get back to you within 24 hours.",
 };
 
 // ---------- VIP Page ----------

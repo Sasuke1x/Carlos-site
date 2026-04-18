@@ -3,13 +3,19 @@
 import { useState } from "react";
 import { Send, Loader2, AlertCircle } from "lucide-react";
 
-const ContactForm = () => {
+interface ContactFormProps {
+  thankYouTitle?: string;
+  thankYouMessage?: string;
+}
+
+const ContactForm = ({ thankYouTitle, thankYouMessage }: ContactFormProps = {}) => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     phone: "",
     message: "",
     type: "guest",
+    website: "", // honeypot
   });
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [errorMsg, setErrorMsg] = useState("");
@@ -56,11 +62,11 @@ const ContactForm = () => {
           <Send className="h-7 w-7 text-white" />
         </div>
         <h3 className="mb-2 text-2xl font-semibold text-green-950">
-          Message Sent!
+          {thankYouTitle ?? "Message Sent!"}
         </h3>
         <p className="text-green-800">
-          Thank you for reaching out. We&apos;ll get back to you within 24
-          hours.
+          {thankYouMessage ??
+            "Thank you for reaching out. We'll get back to you within 24 hours."}
         </p>
       </div>
     );
@@ -72,6 +78,17 @@ const ContactForm = () => {
       className="space-y-5"
       aria-label="Contact us"
     >
+      {/* Honeypot — real users never see or fill this. Bots that auto-fill every field will trip it. */}
+      <input
+        type="text"
+        name="website"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        value={formData.website}
+        onChange={handleChange}
+        className="absolute left-[-9999px] h-0 w-0 opacity-0"
+      />
       <div>
         <label
           htmlFor="contact-name"
