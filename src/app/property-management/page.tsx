@@ -175,7 +175,10 @@ const PropertyManagementPageRoute = async () => {
               </div>
             </div>
             <div className="rounded-2xl bg-white p-8 shadow-lg md:p-10">
-              <ConsultationForm />
+              <ConsultationForm
+                thankYouTitle={data.consultationThankYouTitle}
+                thankYouMessage={data.consultationThankYouMessage}
+              />
             </div>
           </div>
         </div>

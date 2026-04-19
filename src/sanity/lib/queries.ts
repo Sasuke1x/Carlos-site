@@ -159,6 +159,8 @@ export const managementPageQuery = /* groq */ `
   processSteps[]${processStepFragment},
   consultationCtaTitle,
   consultationCtaDescription,
+  consultationThankYouTitle,
+  consultationThankYouMessage,
   seo${seoFragment}
 }
 `;

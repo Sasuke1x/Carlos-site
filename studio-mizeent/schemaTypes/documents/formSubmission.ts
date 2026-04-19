@@ -21,6 +21,7 @@ export const formSubmission = defineType({
       options: {
         list: [
           {title: 'Contact', value: 'contact'},
+          {title: 'Consultation', value: 'consultation'},
           {title: 'VIP', value: 'vip'},
         ],
         layout: 'radio',
@@ -88,11 +89,13 @@ export const formSubmission = defineType({
       title: 'Name',
       type: 'string',
       group: 'submission',
-      hidden: ({document}) => document?.formType !== 'contact',
+      hidden: ({document}) => document?.formType !== 'contact' && document?.formType !== 'consultation',
       validation: (Rule) =>
         Rule.custom((name, context) => {
           const doc = context.document as {formType?: string} | undefined
-          if (doc?.formType === 'contact' && !name) return 'Name is required for contact submissions.'
+          if ((doc?.formType === 'contact' || doc?.formType === 'consultation') && !name) {
+            return 'Name is required.'
+          }
           return true
         }),
     }),
@@ -102,11 +105,13 @@ export const formSubmission = defineType({
       type: 'text',
       rows: 6,
       group: 'submission',
-      hidden: ({document}) => document?.formType !== 'contact',
+      hidden: ({document}) => document?.formType !== 'contact' && document?.formType !== 'consultation',
       validation: (Rule) =>
         Rule.custom((message, context) => {
           const doc = context.document as {formType?: string} | undefined
-          if (doc?.formType === 'contact' && !message) return 'Message is required for contact submissions.'
+          if ((doc?.formType === 'contact' || doc?.formType === 'consultation') && !message) {
+            return 'Message is required.'
+          }
           return true
         }),
     }),
@@ -122,6 +127,7 @@ export const formSubmission = defineType({
         ],
       },
       group: 'submission',
+      // Only the main Contact form collects inquiry type — consultations don't.
       hidden: ({document}) => document?.formType !== 'contact',
     }),
 

@@ -9,6 +9,7 @@ export const managementPage = defineType({
     {name: 'services', title: 'Services'},
     {name: 'process', title: 'Process'},
     {name: 'cta', title: 'Consultation CTA'},
+    {name: 'thanks', title: 'Thank You'},
     {name: 'seo', title: 'SEO'},
   ],
   fields: [
@@ -65,6 +66,20 @@ export const managementPage = defineType({
       type: 'text',
       rows: 3,
       group: 'cta',
+    }),
+    defineField({
+      name: 'consultationThankYouTitle',
+      title: 'Thank You Title',
+      type: 'string',
+      description: 'Shown after the consultation form is submitted successfully.',
+      group: 'thanks',
+    }),
+    defineField({
+      name: 'consultationThankYouMessage',
+      title: 'Thank You Message',
+      type: 'text',
+      rows: 3,
+      group: 'thanks',
     }),
     defineField({
       name: 'seo',

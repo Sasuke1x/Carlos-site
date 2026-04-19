@@ -208,6 +208,8 @@ export interface ManagementPage {
   processSteps?: ProcessStep[];
   consultationCtaTitle?: string;
   consultationCtaDescription?: string;
+  consultationThankYouTitle?: string;
+  consultationThankYouMessage?: string;
   seo?: Seo;
 }
 
@@ -256,7 +258,7 @@ export interface ContactPage {
 
 // ---------- Documents (site-writable) ----------
 
-export type FormSubmissionType = "contact" | "vip";
+export type FormSubmissionType = "contact" | "consultation" | "vip";
 export type FormSubmissionStatus = "new" | "contacted" | "archived";
 export type ContactInquiryType = "guest" | "owner" | "service";
 

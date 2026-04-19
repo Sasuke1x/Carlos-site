@@ -23,6 +23,14 @@ type ContactPayload = {
   website?: string; // honeypot
 };
 
+type ConsultationPayload = {
+  name?: string;
+  email?: string;
+  phone?: string;
+  message?: string;
+  website?: string; // honeypot
+};
+
 type VipPayload = {
   firstName?: string;
   email?: string;
@@ -34,6 +42,7 @@ type VipPayload = {
 
 type SubmissionParams =
   | { formType: "contact"; payload: ContactPayload; request: NextRequest }
+  | { formType: "consultation"; payload: ConsultationPayload; request: NextRequest }
   | { formType: "vip"; payload: VipPayload; request: NextRequest };
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -80,7 +89,7 @@ export const createSubmission = async (
   }
 
   // 3. Per-type validation
-  if (params.formType === "contact") {
+  if (params.formType === "contact" || params.formType === "consultation") {
     if (!params.payload.name) {
       return { ok: false, status: 400, error: "Name is required." };
     }
@@ -129,6 +138,9 @@ export const createSubmission = async (
     doc.name = params.payload.name;
     doc.message = params.payload.message;
     doc.inquiryType = params.payload.type;
+  } else if (params.formType === "consultation") {
+    doc.name = params.payload.name;
+    doc.message = params.payload.message;
   } else {
     doc.firstName = params.payload.firstName;
     doc.emailConsent = !!params.payload.emailConsent;

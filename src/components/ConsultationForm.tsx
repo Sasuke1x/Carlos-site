@@ -3,12 +3,21 @@
 import { useState } from "react";
 import { Send, Loader2, AlertCircle } from "lucide-react";
 
-const ConsultationForm = () => {
+interface ConsultationFormProps {
+  thankYouTitle?: string;
+  thankYouMessage?: string;
+}
+
+const ConsultationForm = ({
+  thankYouTitle,
+  thankYouMessage,
+}: ConsultationFormProps = {}) => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     phone: "",
     message: "",
+    website: "", // honeypot
   });
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [errorMsg, setErrorMsg] = useState("");
@@ -53,11 +62,11 @@ const ConsultationForm = () => {
           <Send className="h-7 w-7 text-white" />
         </div>
         <h3 className="mb-2 text-2xl font-semibold text-green-950">
-          Thank you!
+          {thankYouTitle ?? "Thank you!"}
         </h3>
         <p className="text-green-800">
-          We&apos;ve received your consultation request and will be in touch
-          within 24 hours.
+          {thankYouMessage ??
+            "We've received your consultation request and will be in touch within 24 hours."}
         </p>
       </div>
     );
@@ -69,6 +78,17 @@ const ConsultationForm = () => {
       className="space-y-5"
       aria-label="Request a consultation"
     >
+      {/* Honeypot — real users never see or fill this. */}
+      <input
+        type="text"
+        name="website"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        value={formData.website}
+        onChange={handleChange}
+        className="absolute left-[-9999px] h-0 w-0 opacity-0"
+      />
       <div>
         <label
           htmlFor="consultation-name"

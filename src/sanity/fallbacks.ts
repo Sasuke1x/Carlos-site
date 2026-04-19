@@ -266,6 +266,9 @@ export const DEFAULT_MANAGEMENT_PAGE: ManagementPage = {
   consultationCtaTitle: "Request a Consultation",
   consultationCtaDescription:
     "Whether you own one property or several, we'd love to learn about your goals. Fill out the form and a member of our team will reach out within 24 hours to discuss how we can help you earn more with less effort.",
+  consultationThankYouTitle: "Thank you!",
+  consultationThankYouMessage:
+    "We've received your consultation request and will be in touch within 24 hours.",
 };
 
 // ---------- Renovation Page ----------
