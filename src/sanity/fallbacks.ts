@@ -32,7 +32,7 @@ export const DEFAULT_SITE_SETTINGS: Required<
 > &
   SiteSettings = {
   siteName: "CEO Hosting U",
-  contactEmail: "Mizeenterprise1@gmail.com",
+  contactEmail: "carlos.onti08@ceohostingu.com",
   contactPhone: "+13368835635",
   phoneDisplay: "(336) 883-5635",
   location: "Lexington, NC",
@@ -427,8 +427,8 @@ export const DEFAULT_CONTACT_PAGE: ContactPage = {
     {
       icon: "mail",
       label: "Email",
-      value: "Mizeenterprise1@gmail.com",
-      href: "mailto:Mizeenterprise1@gmail.com",
+      value: "carlos.onti08@ceohostingu.com",
+      href: "mailto:carlos.onti08@ceohostingu.com",
     },
     {
       icon: "mappin",
